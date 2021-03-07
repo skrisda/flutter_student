@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student/screen/create.dart';
+import 'package:flutter_student/screen/detail.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../env.dart';
@@ -30,6 +32,12 @@ class _HomeState extends State<Home> {
     return students;
   }
 
+  void refreshStudentList() {
+    setState(() {
+      students = getStudentList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +58,25 @@ class _HomeState extends State<Home> {
                   leading: Icon(Icons.person),
                   trailing: Icon(Icons.view_list),
                   title: Text('${data.fname} ${data.lname}'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Detail(student: data)));
+                  },
                 ),
               );
             },
           );
         },
       )),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return Create();
+          }));
+        },
+      ),
     );
   }
 }

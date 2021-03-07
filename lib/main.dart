@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student/screen/detail.dart';
 import 'package:flutter_student/screen/home.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Home(),
+        '/detail': (context) => Detail(),
       },
     );
   }
